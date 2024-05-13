@@ -13,7 +13,7 @@ function animate() {
     canvas.height = window.innerHeight;
 
     ctx.save();
-    ctx.translate(0, -car.y + canvas.height*0.7);
+    ctx.translate(0, -car.y + canvas.height*0.7); // place the car at 70% to the bottom of road (more to see ahead)
     
     road.draw(ctx);
     car.draw(ctx);
