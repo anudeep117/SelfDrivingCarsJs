@@ -10,10 +10,33 @@ class NeuralNetwork {
     
     static feedForward(givenInputs, network) {
         let outputs = Layer.feedForward(givenInputs, network.layers[0]);
-        for (let i = 0; i < network.layers.length; i++) {
+        // Note: we are already getting outputs from first layer above, so 
+        // start from 1 (second layer)
+        for (let i = 1; i < network.layers.length; i++) {
             outputs = Layer.feedForward(outputs, network.layers[i]);
         }
         return outputs;
+    }
+
+    static mutate(network, amount=1) {
+        network.layers.forEach(layer => {
+            for (let i = 0; i < layer.biases.length; i++) {
+                layer.biases[i] = lerp(
+                    layer.biases[i],
+                    Math.random()*2-1,
+                    amount
+                )
+            }
+            for (let i = 0; i < layer.weights.length; i++) {
+                for (let j = 0; j < layer.weights[i].length; j++) {
+                    layer.weights[i][j] = lerp(
+                        layer.weights[i][j],
+                        Math.random()*2-1,
+                        amount
+                    )
+                }
+            }
+        })
     }
 }
 
